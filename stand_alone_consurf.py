@@ -2148,11 +2148,11 @@ REMARK 999 MSA Algorithm: %s
             
     if form['ALGORITHM'] == "Bayes":
         
-        remark += "REMARK 999 Rate4site Algorithm: Bayesian"
+        remark += "REMARK 999 Rate4site Algorithm: Bayesian\n"
         
     else:
         
-        remark += "REMARK 999 Rate4site Algorithm: Maximum likelihood"
+        remark += "REMARK 999 Rate4site Algorithm: Maximum likelihood\n"
         
     if form['SUB_MATRIX'] == "JC_Nuc":
         
@@ -2163,9 +2163,9 @@ REMARK 999 MSA Algorithm: %s
         substitution_model = form['SUB_MATRIX']
         
     remark += """REMARK 999 Substitution model: %s
-REMARK 999 MSA Average Pairwise Distance (APD): %s
+REMARK 999 MSA Average Pairwise Distance (APD): %.2f
 REMARK 999 
-""" %(substitution_model, vars['Average pairwise distance'])
+""" %(substitution_model, float(vars['Average pairwise distance']))
             
     return remark
 
@@ -5687,8 +5687,8 @@ def create_MSA():
 
     elif form['MSAprogram'] == "MUSCLE":
 
-        #cmd = "muscle -align %s -output %s" %(vars['FINAL_sequences'], vars['msa_fasta'])
-        cmd = "muscle -in %s -out %s -quiet" %(vars['FINAL_sequences'], vars['msa_fasta'])
+        cmd = "muscle -align %s -output %s" %(vars['FINAL_sequences'], vars['msa_fasta'])
+        #cmd = "muscle -in %s -out %s -quiet" %(vars['FINAL_sequences'], vars['msa_fasta'])
         LOG.write("create_MSA : run %s\n" %cmd)
         submit_job_to_Q("MUSCLE", cmd)
         #convert_msa_format(vars['msa_clustal'], "clustal", vars['msa_fasta'], "fasta")
